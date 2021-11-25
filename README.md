@@ -14,30 +14,6 @@ Ensure you set Config.Debug to false so cops don't trigger a bunch of warnings, 
 If you want 100% report chance then leave Config.DebugChance, though I recommend disabling it.  
 [Share any feedback on the thread](https://forum.cfx.re/t/esx-outlawalert-wildfire-alerts-and-hypaste-mdt-integration/)
 
-### Optional
-<a href='https://github.com/thelindat/mdt'>Download my Hypaste mdt fork</a> or modify the original release (read below).  
-
-<a href='https://github.com/distritic/mdt/'>Hypaste mdt original git</a>  
-Open mdt/sv_mdt.lua and locate RegisterServerEvent("mdt:newCall"), replace with:  
-  ```
-RegisterServerEvent("mdt:newCall")
-AddEventHandler("mdt:newCall", function(details, caller, coords, sendNotification)
-  call_index = call_index + 1
-  local xPlayers = ESX.GetPlayers()
-  for i= 1, #xPlayers do
-  	local source = xPlayers[i]
-  	local xPlayer = ESX.GetPlayerFromId(source)
-  	if xPlayer.job.name == 'police' then
-		if sendNotification ~= false then
-			TriggerClientEvent("InteractSound_CL:PlayOnOne", source, 'demo', 1.0)
-			TriggerClientEvent("mythic_notify:client:SendAlert", source, {type="inform", text="You have received a new call.", 5000, style = { ['background-color'] = '#ffffff', ['color'] = '#000000' }})
-		end
-  		TriggerClientEvent("mdt:newCall", source, details, caller, coords, call_index)
-  	end
-  end
-end)
-```  
-
 ## Custom alerts  
 Check the ![https://github.com/thelindat/linden_outlawalert/wiki](wiki) for existing examples.  
 For example, if we were to edit one of the jewelry heist scripts, you can replace the default method for alerting the police with the following
