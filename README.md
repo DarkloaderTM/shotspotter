@@ -18,7 +18,7 @@ If you want 100% report chance then leave Config.DebugChance, though I recommend
 Check the ![https://github.com/thelindat/linden_outlawalert/wiki](wiki) for existing examples.  
 For example, if we were to edit one of the jewelry heist scripts, you can replace the default method for alerting the police with the following
 ```
-local data = {displayCode = '211', description = 'Robbery', isImportant = 0, recipientList = {'police'}, length = '10000', infoM = 'fa-info-circle', info = 'Vangelico Jewelry Store'}
+local data = {displayCode = '211', description = 'Robbery', isImportant = 0, recipientList = {'police'}, length = '10000', infoM = 'fa-info-circle', info = 'Vangelico Jewelry Store' units = {length = 0}}
 local dispatchData = {dispatchData = data, caller = 'Alarm', coords = vector3(-633.9, -241.7, 38.1)}
 TriggerEvent('wf-alerts:svNotify', dispatchData)
 ```
